@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+
+import GeneralContext from "./GeneralContext";
 
 import { Tooltip, Grow, Button} from "@mui/material";
 
@@ -69,10 +71,16 @@ const WatchlistItem = ({stock}) => {
 };
 
 const WatchlistActions = ({uid}) => {
+  const generalContext = useContext(GeneralContext);
+
+  const handleBuyClick = () => {
+    generalContext.openBuyWindow(uid);
+  };
+
   return(
     <span className="actions">
       <span>
-        <Tooltip title="Buy (B)" placement="top" arrow TransitionComponent={Grow}>
+        <Tooltip title="Buy (B)" placement="top" arrow TransitionComponent={Grow} onClick={handleBuyClick}>
           <button className="buy">Buy</button>
         </Tooltip>
         <Tooltip title="Sell (S)" placement="top" arrow TransitionComponent={Grow}>
