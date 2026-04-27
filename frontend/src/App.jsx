@@ -6,12 +6,14 @@ import ProductPage from './landing_page/products/ProductPage.jsx';
 import Pricing from './landing_page/pricing/PricingPage.jsx';
 import Support from './landing_page/support/SupportPage.jsx';
 import NotFound from './landing_page/NotFound.jsx';
+import Login from './landing_page/signup/login.jsx';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/about" element={<About />} />
       <Route path="/products" element={<ProductPage />} />
       <Route path="/pricing" element={<Pricing />} />

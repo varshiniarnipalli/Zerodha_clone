@@ -4,6 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const authRoute = require("./Routes/AuthRoute");
 
 const PORT = process.env.PORT || 5000;
 const uri = process.env.MONGO_URL;
@@ -15,7 +17,9 @@ const { OrdersModel } = require("./model/OrdersModel");
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(cookieParser());
+app.use("/auth", authRoute);  
 
 app.get("/allHoldings", async(req, res)=>{
     const allHoldings = await HoldingsModel.find();
@@ -39,6 +43,8 @@ app.post("/newOrder", async(req, res)=>{
   res.send("Order added");
   console.log("New order added:", newOrder);
 });
+
+
 
 // app.get("/addHoldings", (req, res)=>{
 //     let tempHoldings = [{
@@ -205,8 +211,8 @@ app.post("/newOrder", async(req, res)=>{
 //   res.send("done");
 // });
 
-app.listen(5000, ()=>{
-    console.log("Server is running on port 5000");
+app.listen(PORT, ()=>{
+    console.log(`Server is running on port ${PORT}`);
     mongoose.connect(uri);
     console.log("Connected to MongoDB");
 })
